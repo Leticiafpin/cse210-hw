@@ -1,59 +1,41 @@
+using System;
+
 public class Fraction
 {
-    private int numerator;
-    private int denominator;
+    private int _top;
+    private int _bottom;
 
-    // Constructor with no parameters
     public Fraction()
     {
-        numerator = 1;
-        denominator = 1;
+        // Default to 1/1
+        _top = 1;
+        _bottom = 1;
     }
 
-    // Constructor with one parameter (numerator)
-    public Fraction(int numerator)
+    public Fraction(int wholeNumber)
     {
-        this.numerator = numerator;
-        this.denominator = 1;
+        _top = wholeNumber;
+        _bottom = 1;
     }
 
-    // Constructor with two parameters (numerator and denominator)
-    public Fraction(int numerator, int denominator)
+    public Fraction(int top, int bottom)
     {
-        this.numerator = numerator;
-        this.denominator = denominator;
+        _top = top;
+        _bottom = bottom;
     }
 
-    // Getters and Setters
-    public int GetNumerator()
-    {
-        return numerator;
-    }
-
-    public void SetNumerator(int numerator)
-    {
-        this.numerator = numerator;
-    }
-
-    public int GetDenominator()
-    {
-        return denominator;
-    }
-
-    public void SetDenominator(int denominator)
-    {
-        this.denominator = denominator;
-    }
-
-    // Method to return the fraction as a string
     public string GetFractionString()
     {
-        return $"{numerator}/{denominator}";
+        // Notice that this is not stored as a member variable.
+        // Is is just a temporary, local variable that will be recomputed each time this is called.
+        string text = $"{_top}/{_bottom}";
+        return text;
     }
 
-    // Method to return the decimal value of the fraction
     public double GetDecimalValue()
     {
-        return (double)numerator / denominator;
+        // Notice that this is not stored as a member variable.
+        // Is will be recomputed each time this is called.
+        return (double)_top / (double)_bottom;
     }
 }
