@@ -124,17 +124,32 @@ class Program
     {
         Console.WriteLine("Hello Foundation2 World!");
 
+        // Primeiro pedido
         Address address1 = new Address("123 Main St", "Anytown", "CA", "USA");
         Customer customer1 = new Customer("John Doe", address1);
         Order order1 = new Order(customer1);
         order1.AddProduct(new Product("Widget", "W123", 10.0, 2));
         order1.AddProduct(new Product("Gadget", "G456", 15.0, 1));
 
-        Console.WriteLine("Packing Label:");
+        Console.WriteLine("Packing Label for Order 1:");
         Console.WriteLine(order1.GetPackingLabel());
-        Console.WriteLine("\nShipping Label:");
+        Console.WriteLine("\nShipping Label for Order 1:");
         Console.WriteLine(order1.GetShippingLabel());
-        Console.WriteLine("\nTotal Cost:");
+        Console.WriteLine("\nTotal Cost for Order 1:");
         Console.WriteLine(order1.GetTotalCost());
+
+        // Segundo pedido
+        Address address2 = new Address("456 Elm St", "Othertown", "TX", "Canada");
+        Customer customer2 = new Customer("Jane Smith", address2);
+        Order order2 = new Order(customer2);
+        order2.AddProduct(new Product("Thingamajig", "T789", 20.0, 3));
+        order2.AddProduct(new Product("Doodad", "D012", 25.0, 2));
+
+        Console.WriteLine("\nPacking Label for Order 2:");
+        Console.WriteLine(order2.GetPackingLabel());
+        Console.WriteLine("\nShipping Label for Order 2:");
+        Console.WriteLine(order2.GetShippingLabel());
+        Console.WriteLine("\nTotal Cost for Order 2:");
+        Console.WriteLine(order2.GetTotalCost());
     }
 }
