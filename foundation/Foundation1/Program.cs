@@ -3,88 +3,76 @@ using System.Collections.Generic;
 
 namespace YouTubeTraker
 {
-    public class Comment
-    {
-        public string CommenterName { get; set; }
-        public string CommentText { get; set; }
 
-        public Comment(string commenterName, string commentText)
-        {
-            CommenterName = commenterName;
-            CommentText = commentText;
-        }
+class Video
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Length { get; set; } // Length in seconds
+    private List<Comment> comments = new List<Comment>();
+
+    public void AddComment(Comment comment)
+    {
+        comments.Add(comment);
     }
 
-    public class Video
+    public int GetNumberOfComments()
     {
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public int Length { get; set; } // Length in seconds
-        private List<Comment> Comments { get; set; }
+        return comments.Count;
+    }
 
-        public Video(string title, string author, int length)
-        {
-            Title = title;
-            Author = author;
-            Length = length;
-            Comments = new List<Comment>();
-        }
+    public List<Comment> GetComments()
+    {
+        return comments;
+    }
+}
 
-        public void AddComment(Comment comment)
-        {
-            Comments.Add(comment);
-        }
+class Comment
+{
+    public string Name { get; set; }
+    public string Text { get; set; }
+}
 
-        public int GetCommentCount()
-        {
-            return Comments.Count;
-        }
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create videos
+        Video video1 = new Video { Title = "Learning C#", Author = "John Doe", Length = 600 };
+        Video video2 = new Video { Title = "Cooking Pasta", Author = "Jane Smith", Length = 300 };
+        Video video3 = new Video { Title = "Travel Vlog", Author = "Alice Johnson", Length = 1200 };
 
-        public void DisplayVideoInfo()
+        // Add comments to video1
+        video1.AddComment(new Comment { Name = "User1", Text = "Great tutorial!" });
+        video1.AddComment(new Comment { Name = "User2", Text = "Very helpful, thanks!" });
+        video1.AddComment(new Comment { Name = "User3", Text = "I learned a lot." });
+
+        // Add comments to video2
+        video2.AddComment(new Comment { Name = "User4", Text = "Yummy recipe!" });
+        video2.AddComment(new Comment { Name = "User5", Text = "Can't wait to try this." });
+
+        // Add comments to video3
+        video3.AddComment(new Comment { Name = "User6", Text = "Amazing places!" });
+        video3.AddComment(new Comment { Name = "User7", Text = "Beautiful scenery." });
+        video3.AddComment(new Comment { Name = "User8", Text = "Great vlog!" });
+
+        // Store videos in a list
+        List<Video> videos = new List<Video> { video1, video2, video3 };
+
+        // Display video details and comments
+        foreach (var video in videos)
         {
-            Console.WriteLine($"Title: {Title}");
-            Console.WriteLine($"Author: {Author}");
-            Console.WriteLine($"Length: {Length} seconds");
-            Console.WriteLine($"Number of Comments: {GetCommentCount()}");
+            Console.WriteLine($"Title: {video.Title}");
+            Console.WriteLine($"Author: {video.Author}");
+            Console.WriteLine($"Length: {video.Length} seconds");
+            Console.WriteLine($"Number of Comments: {video.GetNumberOfComments()}");
             Console.WriteLine("Comments:");
-            foreach (var comment in Comments)
+            foreach (var comment in video.GetComments())
             {
-                Console.WriteLine($"- {comment.CommenterName}: {comment.CommentText}");
+                Console.WriteLine($"- {comment.Name}: {comment.Text}");
             }
+            Console.WriteLine();
         }
     }
-
-    class Program
-    {
-        static void Main()
-        {
-            // Create videos
-            var video1 = new Video("Introduction to C#", "John Doe", 300);
-            var video2 = new Video("Advanced C# Techniques", "Jane Smith", 600);
-            var video3 = new Video("C# Design Patterns", "Emily Johnson", 450);
-
-            // Add comments to videos
-            video1.AddComment(new Comment("Alice", "Great video!"));
-            video1.AddComment(new Comment("Bob", "Very informative."));
-            video1.AddComment(new Comment("Charlie", "Thanks for sharing."));
-
-            video2.AddComment(new Comment("Dave", "Excellent content."));
-            video2.AddComment(new Comment("Eve", "Learned a lot."));
-            video2.AddComment(new Comment("Frank", "Well explained."));
-
-            video3.AddComment(new Comment("Grace", "Helpful tutorial."));
-            video3.AddComment(new Comment("Heidi", "Loved the examples."));
-            video3.AddComment(new Comment("Ivan", "Clear and concise."));
-
-            // Store videos in a list
-            var videos = new List<Video> { video1, video2, video3 };
-
-            // Display video information
-            foreach (var video in videos)
-            {
-                video.DisplayVideoInfo();
-                Console.WriteLine();
-            }
-        }
-    }
+}
 }
