@@ -27,7 +27,7 @@ class SimpleGoal : Goal
     public override void RecordEvent()
     {
         IsCompleted = true;
-        Console.WriteLine($"Meta '{Name}' completada! Você ganhou {Points} pontos.");
+        Console.WriteLine($"Goal '{Name}' completed! You earned {Points} points.");
     }
 
     public override string GetStatus()
@@ -47,7 +47,7 @@ class EternalGoal : Goal
 
     public override void RecordEvent()
     {
-        Console.WriteLine($"Meta '{Name}' registrada! Você ganhou {Points} pontos.");
+        Console.WriteLine($"Goal '{Name}' recorded! You earned {Points} points.");
     }
 
     public override string GetStatus()
@@ -80,11 +80,11 @@ class ChecklistGoal : Goal
         if (CurrentCount >= TargetCount)
         {
             IsCompleted = true;
-            Console.WriteLine($"Meta '{Name}' completada! Você ganhou {Points + BonusPoints} pontos.");
+            Console.WriteLine($"Goal '{Name}' completed! You earned {Points + BonusPoints} points.");
         }
         else
         {
-            Console.WriteLine($"Meta '{Name}' registrada! Você ganhou {Points} pontos.");
+            Console.WriteLine($"Goal '{Name}' recorded! You earned {Points} points.");
         }
     }
 
@@ -110,14 +110,14 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("Escolha uma opção:");
-            Console.WriteLine("1. Criar nova meta");
-            Console.WriteLine("2. Registrar evento");
-            Console.WriteLine("3. Mostrar metas");
-            Console.WriteLine("4. Mostrar pontuação total");
-            Console.WriteLine("5. Salvar metas");
-            Console.WriteLine("6. Carregar metas");
-            Console.WriteLine("7. Sair");
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1. Create new goal");
+            Console.WriteLine("2. Record event");
+            Console.WriteLine("3. Show goals");
+            Console.WriteLine("4. Show total points");
+            Console.WriteLine("5. Save goals");
+            Console.WriteLine("6. Load goals");
+            Console.WriteLine("7. Exit");
             string choice = Console.ReadLine();
 
             switch (choice)
@@ -143,7 +143,7 @@ class Program
                 case "7":
                     return;
                 default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Console.WriteLine("Invalid option. Please try again.");
                     break;
             }
         }
@@ -151,15 +151,15 @@ class Program
 
     static void CreateGoal()
     {
-        Console.WriteLine("Escolha o tipo de meta:");
-        Console.WriteLine("1. Meta Simples");
-        Console.WriteLine("2. Meta Eterna");
-        Console.WriteLine("3. Meta de Checklist");
+        Console.WriteLine("Choose the type of goal:");
+        Console.WriteLine("1. Simple Goal");
+        Console.WriteLine("2. Eternal Goal");
+        Console.WriteLine("3. Checklist Goal");
         string choice = Console.ReadLine();
 
-        Console.Write("Digite o nome da meta: ");
+        Console.Write("Enter the name of the goal: ");
         string name = Console.ReadLine();
-        Console.Write("Digite os pontos da meta: ");
+        Console.Write("Enter the points for the goal: ");
         int points = int.Parse(Console.ReadLine());
 
         switch (choice)
@@ -171,21 +171,21 @@ class Program
                 goals.Add(new EternalGoal(name, points));
                 break;
             case "3":
-                Console.Write("Digite o número de vezes que a meta deve ser completada: ");
+                Console.Write("Enter the number of times the goal must be completed: ");
                 int targetCount = int.Parse(Console.ReadLine());
-                Console.Write("Digite os pontos bônus para completar a meta: ");
+                Console.Write("Enter the bonus points for completing the goal: ");
                 int bonusPoints = int.Parse(Console.ReadLine());
                 goals.Add(new ChecklistGoal(name, points, targetCount, bonusPoints));
                 break;
             default:
-                Console.WriteLine("Tipo de meta inválido. Tente novamente.");
+                Console.WriteLine("Invalid goal type. Please try again.");
                 break;
         }
     }
 
     static void RecordEvent()
     {
-        Console.WriteLine("Escolha a meta para registrar um evento:");
+        Console.WriteLine("Choose the goal to record an event:");
         for (int i = 0; i < goals.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {goals[i].Name} - {goals[i].GetStatus()}");
@@ -199,13 +199,13 @@ class Program
         }
         else
         {
-            Console.WriteLine("Meta inválida. Tente novamente.");
+            Console.WriteLine("Invalid goal. Please try again.");
         }
     }
 
     static void ShowGoals()
     {
-        Console.WriteLine("Metas:");
+        Console.WriteLine("Goals:");
         foreach (var goal in goals)
         {
             Console.WriteLine($"{goal.Name} - {goal.GetStatus()}");
@@ -214,7 +214,7 @@ class Program
 
     static void ShowTotalPoints()
     {
-        Console.WriteLine($"Pontuação total: {totalPoints}");
+        Console.WriteLine($"Total points: {totalPoints}");
     }
 
     static void SaveGoals()
@@ -227,7 +227,7 @@ class Program
                 outputFile.WriteLine(goal.GetStringRepresentation());
             }
         }
-        Console.WriteLine("Metas salvas com sucesso.");
+        Console.WriteLine("Goals saved successfully.");
     }
 
     static void LoadGoals()
@@ -261,11 +261,11 @@ class Program
                         break;
                 }
             }
-            Console.WriteLine("Metas carregadas com sucesso.");
+            Console.WriteLine("Goals loaded successfully.");
         }
         else
         {
-            Console.WriteLine("Nenhum arquivo de metas encontrado.");
+            Console.WriteLine("No goals file found.");
         }
     }
 }

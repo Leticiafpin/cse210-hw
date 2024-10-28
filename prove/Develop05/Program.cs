@@ -12,10 +12,10 @@ abstract class MindfulnessActivity
 
     public void StartActivity()
     {
-        Console.WriteLine($"Iniciando {this.GetType().Name} por {duration} segundos.");
+        Console.WriteLine($"Starting {this.GetType().Name} for {duration} seconds.");
         Thread.Sleep(2000);
         PerformActivity();
-        Console.WriteLine($"Bom trabalho! Você completou a {this.GetType().Name} por {duration} segundos.");
+        Console.WriteLine($"Good job! You completed the {this.GetType().Name} for {duration} seconds.");
         Thread.Sleep(2000);
     }
 
@@ -28,12 +28,12 @@ class BreathingActivity : MindfulnessActivity
 
     protected override void PerformActivity()
     {
-        Console.WriteLine("Esta atividade vai ajudá-lo a relaxar, guiando-o a respirar lenta e profundamente. Limpe sua mente e concentre-se na sua respiração.");
+        Console.WriteLine("This activity will help you relax by guiding you to breathe in and out slowly. Clear your mind and focus on your breathing.");
         for (int i = 0; i < duration / 4; i++)
         {
-            Console.WriteLine("Inspire...");
+            Console.WriteLine("Breathe in...");
             Thread.Sleep(2000);
-            Console.WriteLine("Expire...");
+            Console.WriteLine("Breathe out...");
             Thread.Sleep(2000);
         }
     }
@@ -42,29 +42,29 @@ class BreathingActivity : MindfulnessActivity
 class ReflectionActivity : MindfulnessActivity
 {
     private static readonly string[] prompts = {
-        "Pense em uma vez que você defendeu alguém.",
-        "Pense em uma vez que você fez algo muito difícil.",
-        "Pense em uma vez que você ajudou alguém em necessidade.",
-        "Pense em uma vez que você fez algo verdadeiramente altruísta."
+        "Think of a time when you stood up for someone.",
+        "Think of a time when you did something very difficult.",
+        "Think of a time when you helped someone in need.",
+        "Think of a time when you did something truly selfless."
     };
 
     private static readonly string[] questions = {
-        "Por que essa experiência foi significativa para você?",
-        "Você já fez algo assim antes?",
-        "Como você começou?",
-        "Como você se sentiu quando terminou?",
-        "O que tornou essa vez diferente de outras vezes em que você não foi tão bem-sucedido?",
-        "Qual é a sua coisa favorita sobre essa experiência?",
-        "O que você poderia aprender com essa experiência que se aplica a outras situações?",
-        "O que você aprendeu sobre si mesmo através dessa experiência?",
-        "Como você pode manter essa experiência em mente no futuro?"
+        "Why was this experience meaningful to you?",
+        "Have you ever done anything like this before?",
+        "How did you get started?",
+        "How did you feel when it was complete?",
+        "What made this time different from other times when you were not as successful?",
+        "What is your favorite thing about this experience?",
+        "What could you learn from this experience that applies to other situations?",
+        "What did you learn about yourself through this experience?",
+        "How can you keep this experience in mind in the future?"
     };
 
     public ReflectionActivity(int duration) : base(duration) { }
 
     protected override void PerformActivity()
     {
-        Console.WriteLine("Esta atividade vai ajudá-lo a refletir sobre momentos em sua vida em que você mostrou força e resiliência. Isso vai ajudá-lo a reconhecer o poder que você tem e como pode usá-lo em outros aspectos da sua vida.");
+        Console.WriteLine("This activity will help you reflect on times in your life when you showed strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
         Random rand = new Random();
         string prompt = prompts[rand.Next(prompts.Length)];
         Console.WriteLine(prompt);
@@ -80,25 +80,25 @@ class ReflectionActivity : MindfulnessActivity
 class ListingActivity : MindfulnessActivity
 {
     private static readonly string[] prompts = {
-        "Quem são as pessoas que você aprecia?",
-        "Quais são suas forças pessoais?",
-        "Quem são as pessoas que você ajudou esta semana?",
-        "Quando você sentiu o Espírito Santo este mês?",
-        "Quem são alguns dos seus heróis pessoais?"
+        "Who are the people you appreciate?",
+        "What are your personal strengths?",
+        "Who are the people you helped this week?",
+        "When did you feel the Holy Spirit this month?",
+        "Who are some of your personal heroes?"
     };
 
     public ListingActivity(int duration) : base(duration) { }
 
     protected override void PerformActivity()
     {
-        Console.WriteLine("Esta atividade vai ajudá-lo a refletir sobre as coisas boas em sua vida, fazendo você listar o máximo de coisas que puder em uma determinada área.");
+        Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
         Random rand = new Random();
         string prompt = prompts[rand.Next(prompts.Length)];
         Console.WriteLine(prompt);
         Thread.Sleep(5000);
-        Console.WriteLine("Comece a listar...");
+        Console.WriteLine("Start listing...");
         Thread.Sleep(duration * 1000);
-        Console.WriteLine("O tempo acabou! Quantos itens você listou?");
+        Console.WriteLine("Time's up! How many items did you list?");
     }
 }
 
@@ -108,15 +108,15 @@ class Program
     {
         while (true)
         {
-            Console.WriteLine("Escolha uma atividade:");
-            Console.WriteLine("1. Atividade de Respiração");
-            Console.WriteLine("2. Atividade de Reflexão");
-            Console.WriteLine("3. Atividade de Listagem");
+            Console.WriteLine("Choose an activity:");
+            Console.WriteLine("1. Breathing Activity");
+            Console.WriteLine("2. Reflection Activity");
+            Console.WriteLine("3. Listing Activity");
             string choice = Console.ReadLine();
 
             if (int.TryParse(choice, out int activityChoice) && activityChoice >= 1 && activityChoice <= 3)
             {
-                Console.Write("Digite a duração da atividade em segundos: ");
+                Console.Write("Enter the duration of the activity in seconds: ");
                 if (int.TryParse(Console.ReadLine(), out int duration))
                 {
                     MindfulnessActivity activity = activityChoice switch
@@ -131,12 +131,12 @@ class Program
                 }
                 else
                 {
-                    Console.WriteLine("Duração inválida. Tente novamente.");
+                    Console.WriteLine("Invalid duration. Please try again.");
                 }
             }
             else
             {
-                Console.WriteLine("Escolha inválida. Tente novamente.");
+                Console.WriteLine("Invalid choice. Please try again.");
             }
         }
     }
